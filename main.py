@@ -97,7 +97,7 @@ If something is missing or uncertain, say so honestly.
 # ----------------- STREAMLIT CHAT UI -----------------
 st.set_page_config(page_title="Omega - AI Assistant", page_icon="☁️")
 st.title("Omega Veo")
-st.caption("Gemini‑powered assistant with weather + Wikipedia (no LangChain)")
+st.caption("MADE BY - Anshuman Pattanayak")
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
@@ -133,3 +133,4 @@ if user_input:
 
 
     st.session_state.messages.append({"role": "assistant", "content": answer})
+
