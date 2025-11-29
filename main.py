@@ -21,15 +21,23 @@ custom_css = """
         color: #f5f5f5;
     }
 
+    /* Make sidebar dark and NARROWER */
     [data-testid="stSidebar"] > div:first-child {
         background-color: #05060a;
         color: #f5f5f5;
     }
 
+    /* Sidebar width (adjust these numbers if you want even narrower/wider) */
     [data-testid="stSidebar"] {
-        min-width: 260px;
-        max-width: 260px;
+        width: 210px !important;
+        min-width: 210px !important;
+        max-width: 210px !important;
         border-right: 1px solid #27293a;
+    }
+
+    /* Hide the sidebar collapse/expand arrow so it feels permanent */
+    [data-testid="collapsedControl"] {
+        display: none;
     }
 
     .omega-main {
@@ -53,43 +61,7 @@ custom_css = """
         text-align: center;
     }
 
-    /* Outer wrapper: no background anymore (so no dummy pill) */
-    .omega-search-card {
-        margin-top: 1.4rem;
-    }
-
-    /* Style the actual input container to look like the DeepSeek box */
-    .omega-search-card [data-testid="stTextInput"] > div {
-        background: transparent;
-    }
-
-    .omega-search-card [data-testid="stTextInput"] > div > div {
-        background: #191a23;
-        border-radius: 26px;
-        border: 1px solid #27293a;
-        box-shadow: 0 0 35px rgba(0,0,0,0.7);
-        padding: 0.6rem 0.8rem;
-    }
-
-    .omega-search-card [data-testid="stTextInput"] > div > div > input {
-        background: transparent;
-        border: none;
-        color: #f5f5f5;
-        font-size: 0.95rem;
-    }
-
-    .omega-search-card [data-testid="stTextInput"] label {
-        display: none;
-    }
-
-    .omega-send-btn button[kind="secondary"] {
-        background-color: #3f5cff;
-        color: white;
-        border-radius: 999px;
-        border: none;
-        padding: 0.35rem 0.9rem;
-        font-size: 1.0rem;
-    }
+    /* ... keep the rest of your CSS here (omega-search-card, omega-send-btn, etc.) ... */
 </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
