@@ -1,7 +1,7 @@
+# main.py
 import os
 import requests
 import wikipedia
-import streamlit as st
 from dotenv import load_dotenv
 import google.generativeai as genai
 
@@ -12,7 +12,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 if not GOOGLE_API_KEY:
-    raise RuntimeError("GOOGLE_API_KEY not set in .env")
+    raise RuntimeError("GOOGLE_API_KEY not set in environment variables")
 
 genai.configure(api_key=GOOGLE_API_KEY)
 
@@ -71,7 +71,7 @@ def answer_query(query: str) -> str:
     wiki_info = get_wikipedia_summary(query)
 
     prompt = f"""
-You are Omega, a helpful research assistant.
+You are OmegaVeo, a helpful research assistant.
 
 User question:
 {query}
@@ -92,45 +92,3 @@ If something is missing or uncertain, say so honestly.
         return response.text
     except Exception as e:
         return f"Error while calling Gemini model: {e}"
-
-
-# ----------------- STREAMLIT CHAT UI -----------------
-st.set_page_config(page_title="Omega - AI Assistant", page_icon="☁️")
-st.title("Omega Veo")
-st.caption("MADE BY - Anshuman Pattanayak")
-
-if "messages" not in st.session_state:
-    st.session_state.messages = [
-        {
-            "role": "assistant",
-            "content": (
-                "Hi, I'm **Omega**.\n\n"
-                "- Ask me general questions.\n"
-                "- You can also ask about weather, e.g. `What is the weather in Bhubaneswar?`"
-            ),
-        }
-    ]
-
-# Display chat history
-for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
-
-# User input
-user_input = st.chat_input("Type your question here")
-
-if user_input:
-    # Show user message
-    st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user"):
-        st.markdown(user_input)
-
-    # Get answer from our plain-Python "agent"
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            answer = answer_query(user_input)
-            st.markdown(answer)
-
-
-    st.session_state.messages.append({"role": "assistant", "content": answer})
-
