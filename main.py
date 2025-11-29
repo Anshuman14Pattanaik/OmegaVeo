@@ -1,6 +1,6 @@
 # app.py
 import streamlit as st
-from main import answer_query  # import your main logic
+from core import answer_query  # import your main logic
 
 # ----------------- PAGE CONFIG -----------------
 st.set_page_config(
@@ -131,3 +131,4 @@ if user_input:
             st.markdown(answer)
 
     st.session_state.messages.append({"role": "assistant", "content": answer})
+
